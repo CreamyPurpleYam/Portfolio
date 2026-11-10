@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0b1020" />
+  <meta name="description" content="Portfolio of Joshua Clarens C. Monzon — BS Information Technology student, project leader, and aspiring software developer." />
+  <title>Joshua Monzon | IT Portfolio</title>
+  <style>
+    :root {
+      --bg: #f7f8f3; --surface: #fffefa; --surface-2: #f0f2ec;
+      --text: #202923; --muted: #68716a; --accent: #246b5a;
+      --accent-2: #7b9b8c; --line: #dfe4dc;
+      --radius: 8px; --max: 920px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 70px; }
+    body { margin: 0; color: var(--text); background: var(--bg);
+      font: 14px/1.6 Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif; }
+    a { color: inherit; text-decoration: none; }
+    .container { width: min(var(--max), calc(100% - 48px)); margin-inline: auto; }
+    .nav-wrap { position: sticky; top: 0; z-index: 20; backdrop-filter: blur(14px);
+      background: rgba(247,248,243,.94); border-bottom: 1px solid var(--line); }
+    nav { min-height: 58px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+    .brand { font-family: Georgia, serif; font-weight: 700; font-size: .95rem; letter-spacing: -.04em; }
+    .brand span { color: var(--accent); }
+    .nav-links { display: flex; flex-wrap: wrap; gap: 17px; color: #4f5b53; font-size: .78rem; }
+    .nav-links a:hover { color: var(--accent); }
+    .menu-btn { display: none; color: var(--text); border: 1px solid var(--line); background: var(--surface); border-radius: 6px; padding: 6px 10px; }
+    .hero { min-height: 0; display: grid; grid-template-columns: 1.35fr .65fr; align-items: center; gap: 36px; padding-block: 72px 62px; border-bottom: 1px solid var(--line); }
+    .eyebrow { color: var(--accent); font-weight: 600; letter-spacing: .13em; text-transform: uppercase; font-size: .68rem; }
+    h1, .section-head h2 { font-family: Georgia, "Times New Roman", serif; font-weight: 600; }
+    h1 { font-size: clamp(2rem, 4vw, 3rem); line-height: 1.15; letter-spacing: -.04em; margin: 10px 0 12px; }
+    h1 .gradient { color: var(--text); background: none; }
+    .lead { color: var(--muted); font-size: .88rem; max-width: 590px; margin: 0; }
+    .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; border-radius: 5px; padding: 9px 13px; font-weight: 600; font-size: .78rem; border: 1px solid var(--line); transition: transform .2s, border-color .2s; }
+    .btn:hover { transform: translateY(-1px); border-color: var(--accent); }
+    .btn.primary { color: #fff; border: 0; background: var(--accent); }
+    .portrait { display: grid; place-items: center; }
+    .portrait-frame { width: 100%; max-width: 245px; aspect-ratio: auto; border-radius: 0; border: 0; border-left: 2px solid var(--accent-2);
+      background: #eef1eb; display: block; text-align: left; padding: 15px 18px; transform: none; }
+    .portrait-frame .inner { transform: none; }
+    .portrait-icon { display: none; }
+    .portrait-frame strong { display: block; font-size: .8rem; font-weight: 500; }
+    .portrait-frame small { color: var(--muted); display: block; margin-top: 5px; font-size: .75rem; }
+    section { padding-block: 54px; border-bottom: 1px solid var(--line); }
+    .section-head { margin-bottom: 22px; }
+    .section-head h2 { font-size: 1.55rem; letter-spacing: -.025em; line-height: 1.2; margin: 4px 0 8px; }
+    .section-head p { color: var(--muted); max-width: 680px; margin: 0; font-size: .82rem; }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .panel, .card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px; }
+    .panel p { color: var(--muted); margin: 0; font-size: .82rem; }
+    .panel p + p { margin-top: 10px; }
+    .panel h3 { margin: 0 0 7px; font-size: .88rem; }
+    .quick-facts { display: grid; gap: 10px; }
+    .fact { display: flex; justify-content: space-between; gap: 12px; padding-bottom: 9px; border-bottom: 1px solid var(--line); font-size: .8rem; }
+    .fact:last-child { border-bottom: 0; padding-bottom: 0; }
+    .fact span { color: var(--muted); }
+    .fact strong { text-align: right; font-weight: 600; }
+    .skill-groups { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    .skill-group h3 { margin: 0 0 8px; font-size: .86rem; }
+    .chips { display: flex; flex-wrap: wrap; gap: 6px; }
+    .chip { font-size: .74rem; padding: 3px 7px; color: #48564c; background: #f1f3ed; border: 1px solid #e4e8df; border-radius: 4px; }
+    .projects { display: grid; grid-template-columns: 1fr; gap: 12px; }
+    .project-card { overflow: hidden; padding: 0; }
+    .project-visual { display: block; width: 100%; height: clamp(180px, 30vw, 300px); overflow: hidden; background: #f2eee6; border-bottom: 1px solid var(--line); }
+    .project-visual img { display: block; width: 100%; height: 100%; object-fit: contain; }
+    .project-visual.vetterment img { object-fit: contain; padding: 8px; }
+    .project-visual.isip img { object-fit: contain; padding: 8px; }
+    .project-visual.garbage img { object-fit: contain; padding: 8px; }
+    @media (max-width: 520px) { .project-visual { height: 210px; } }
+    .project-content { padding: 20px 22px 14px; }
+    .project-content h3 { font-family: Georgia, "Times New Roman", serif; margin: 3px 0 5px; font-size: 1.2rem; font-weight: 600; }
+    .project-content p { color: var(--muted); font-size: .82rem; margin: 0 0 10px; }
+    .project-meta { color: var(--accent); font-size: .66rem; font-weight: 600; letter-spacing: .1em; margin-bottom: 5px; }
+    .text-link { color: var(--accent); font-weight: 600; font-size: .78rem; }
+    .project-details { margin: 0 22px; border-top: 1px solid var(--line); font-size: .8rem; }
+    .project-details summary { cursor: pointer; color: var(--accent); font-weight: 600; padding: 12px 0; list-style: none; display: flex; justify-content: space-between; }
+    .project-details summary::-webkit-details-marker { display: none; }
+    .project-details summary span::after { content: "+"; }
+    .project-details[open] summary span::after { content: "−"; }
+    .project-details .detail-body { color: var(--muted); padding: 0 0 14px; }
+    .project-details ul { margin: 6px 0; padding-left: 18px; }
+    .timeline { display: grid; gap: 12px; }
+    .timeline-item { display: grid; grid-template-columns: 220px 1fr; gap: 24px; padding: 15px 0; border: 0; border-radius: 0; background: transparent; border-bottom: 1px solid var(--line); }
+    .timeline-date { color: var(--muted); font-size: .78rem; }
+    .timeline-item h3 { margin: 0 0 3px; font-size: .88rem; }
+    .timeline-item p { color: var(--muted); margin: 0; font-size: .78rem; }
+    .timeline-item ul { color: var(--muted); margin: 8px 0 0; padding-left: 18px; font-size: .78rem; }
+    .cert-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .certificate { min-height: 0; display: flex; flex-direction: column; gap: 14px; padding: 12px; }
+    .cert-placeholder { min-height: 145px; display: grid; place-items: center; text-align: center; color: var(--muted); border: 1px dashed #bdc9be; border-radius: 4px; background: #f7f8f4; padding: 18px; font-size: .78rem; }
+    .certificate h3 { font-size: .86rem; margin: 0 0 5px; }
+    .certificate p { color: var(--muted); margin: 0; font-size: .75rem; }
+    .education-list { display: grid; grid-template-columns: 1fr; gap: 0; }
+    .education { display: flex; justify-content: space-between; align-items: baseline; gap: 20px; padding: 13px 0; border: 0; border-bottom: 1px solid var(--line); border-radius: 0; background: transparent; }
+    .education h3 { margin: 0; font-size: .83rem; }
+    .education p { margin: 0; color: var(--muted); font-size: .78rem; text-align: right; }
+    .contact-box { display: block; padding: 0; border-radius: 0; border: 0; background: transparent; }
+    .contact-box h2 { font-family: Georgia, serif; margin: 5px 0 14px; font-size: 1.55rem; letter-spacing: -.025em; }
+    .contact-box p { margin: 0; color: var(--muted); font-size: .82rem; }
+    footer { padding: 20px 0 28px; border-top: 1px solid var(--line); color: var(--muted); font-size: .75rem; }
+    footer .container { display: flex; justify-content: space-between; gap: 15px; flex-wrap: wrap; }
+    @media (max-width: 850px) {
+      .hero { grid-template-columns: 1fr .55fr; gap: 24px; }
+      .about-grid, .projects, .cert-grid { grid-template-columns: 1fr 1fr; }
+      .projects { grid-template-columns: 1fr; }
+      .skill-groups { grid-template-columns: repeat(2, 1fr); }
+      .nav-links { gap: 10px; font-size: .74rem; }
+    }
+    @media (max-width: 600px) {
+      .container { width: min(var(--max), calc(100% - 30px)); }
+      nav { min-height: 56px; }
+      .menu-btn { display: block; }
+      .nav-links { display: none; position: absolute; top: 56px; left: 0; right: 0; padding: 16px 20px; background: var(--bg); border-bottom: 1px solid var(--line); flex-direction: column; }
+      .nav-links.open { display: flex; }
+      .hero { grid-template-columns: 1fr; padding-block: 48px 40px; gap: 22px; }
+      .portrait { justify-content: start; }
+      .portrait-frame { max-width: 100%; }
+      section { padding-block: 42px; }
+      .about-grid, .skill-groups, .cert-grid, .education-list { grid-template-columns: 1fr; }
+      .timeline-item { grid-template-columns: 1fr; gap: 5px; }
+      .education { flex-direction: column; gap: 3px; align-items: flex-start; }
+      .education p { text-align: left; }
+      h1 { font-size: clamp(2.2rem, 11vw, 3rem); }
+    }
+
+    /* Visual refinement: clearer hierarchy and selective emphasis */
+    body { background: #fbfcfa; color: #1d2b26; }
+    .nav-wrap { background: rgba(251,252,250,.96); border-bottom-color: #d8e2dc; }
+    .brand span { color: #2f7864; }
+    .nav-links a { color: #56675e; }
+    .nav-links a:hover { color: #236b55; }
+
+    .hero {
+      position: relative;
+      padding: 76px 34px 66px;
+      margin-top: 18px;
+      border: 1px solid #dce7df;
+      border-radius: 14px;
+      background: linear-gradient(115deg, #f0f6f1 0%, #ffffff 68%);
+      box-shadow: 0 8px 28px rgba(29, 58, 43, .045);
+    }
+    .hero .eyebrow { color: #347761; }
+    h1 { color: #172c23; }
+    h1 .gradient { color: #2d765e; }
+    .lead { color: #58685f; }
+    .portrait-frame {
+      background: #e5eee7;
+      border-left: 3px solid #4c8c72;
+      border-radius: 8px;
+    }
+
+    section { border-bottom-color: #e0e7e1; }
+    section:nth-of-type(even) { background: #f5f8f5; }
+    .section-head h2 { color: #1c3027; }
+    .section-head .eyebrow { color: #3c8067; }
+
+    .panel, .card {
+      border-color: #dce5de;
+      box-shadow: 0 3px 12px rgba(30, 53, 40, .035);
+    }
+    .about-grid .panel { background: #fff; }
+    .about-grid .panel h3 { color: #2b4437; }
+    .fact strong { color: #263b30; }
+
+    .skill-group { transition: border-color .18s, transform .18s; }
+    .skill-group:hover { border-color: #b6d0bf; transform: translateY(-2px); }
+    .chip {
+      color: #355848;
+      background: #edf4ef;
+      border-color: #d8e7dc;
+    }
+
+    .project-card {
+      border: 1px solid #d6e3da;
+      border-left: 4px solid #4c8b6d;
+      border-radius: 10px;
+      box-shadow: 0 5px 18px rgba(28, 59, 42, .055);
+      transition: transform .18s, box-shadow .18s, border-color .18s;
+    }
+    .project-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 9px 24px rgba(28, 59, 42, .09);
+      border-color: #b7d0bf;
+      border-left-color: #2c7658;
+    }
+    .project-card:first-child {
+      background: linear-gradient(110deg, #f2f8f3 0%, #ffffff 42%);
+      border-left-color: #286d51;
+    }
+    .project-meta {
+      color: #39775e;
+      letter-spacing: .12em;
+    }
+    .project-content h3 { color: #20372a; }
+    .project-content p { color: #59685f; }
+    .project-details { border-top-color: #e0e8e2; }
+    .project-details summary { color: #2e7659; }
+    .project-details .detail-body { color: #53645a; }
+    .btn.primary { background: #286d51; }
+    .btn.primary:hover { background: #205940; }
+
+    #experience .timeline-item {
+      position: relative;
+      padding: 20px 22px;
+      border: 1px solid #dce5de;
+      border-left: 3px solid #6a9a7d;
+      border-radius: 8px;
+      background: #fff;
+      box-shadow: 0 3px 12px rgba(30, 53, 40, .035);
+    }
+    .timeline-date { color: #39775e; font-weight: 650; }
+    .timeline-item h3 { color: #253b2e; }
+    .timeline-item p, .timeline-item ul { color: #59685f; }
+
+    .certificate { background: #fff; }
+    .cert-placeholder { background: #f1f5f1; border-color: #c8d8cb; color: #66776b; }
+    .education h3 { color: #2d4034; }
+    .education p { color: #65736a; }
+
+    .contact-box {
+      padding: 28px 30px;
+      border: 1px solid #d8e5dc;
+      border-radius: 10px;
+      background: linear-gradient(110deg, #edf5ef, #ffffff);
+    }
+    .contact-box h2 { color: #1e3528; }
+    footer { color: #6a766d; border-top-color: #dce5de; }
+
+    @media (max-width: 600px) {
+      .hero { padding: 42px 20px 36px; margin-top: 10px; }
+      .contact-box { padding: 22px 20px; }
+    }
+
+
+    /* Final art direction: refined developer portfolio, warm-white base,
+       deep forest ink, restrained teal, and stronger featured-work hierarchy. */
+    :root {
+      --bg: #fafbf8;
+      --surface: #ffffff;
+      --surface-2: #f1f5f1;
+      --text: #1c2923;
+      --muted: #637168;
+      --accent: #24684f;
+      --accent-2: #7ba18b;
+      --line: #dce5dd;
+      --radius: 10px;
+    }
+    body { background: #fafbf8; color: #1c2923; }
+    .container { width: min(960px, calc(100% - 44px)); }
+    .nav-wrap { border-bottom: 1px solid #e0e7e0; background: rgba(250,251,248,.96); }
+    nav { min-height: 62px; }
+    .brand { font-family: Georgia, "Times New Roman", serif; font-size: 1.05rem; }
+    .brand span { color: #24684f; }
+    .nav-links { color: #5c6b61; gap: 18px; }
+    .nav-links a:hover { color: #24684f; }
+
+    .hero {
+      margin-top: 16px;
+      padding: 72px 38px 68px;
+      border: 1px solid #dce7df;
+      border-radius: 12px;
+      background: linear-gradient(112deg, #edf4ee 0%, #fbfcfa 64%, #f5f8f4 100%);
+      box-shadow: 0 10px 30px rgba(35, 67, 47, .045);
+    }
+    .hero .eyebrow { color: #38765d; }
+    h1 { color: #1a3024; font-size: clamp(2.3rem, 4.7vw, 3.35rem); }
+    h1 .gradient { color: #2e7457; }
+    .lead { color: #58685e; max-width: 570px; font-size: .94rem; }
+    .portrait-frame { background: #e5eee6; border-left: 3px solid #4f8b6c; border-radius: 7px; }
+
+    section { padding-block: 62px; border-bottom: 1px solid #e1e8e1; }
+    section:nth-of-type(even) { background: #f5f8f4; }
+    .section-head { margin-bottom: 25px; }
+    .section-head .eyebrow { color: #3a7b60; }
+    .section-head h2 { color: #1e3327; font-size: 1.75rem; }
+    .section-head p { font-size: .85rem; color: #657268; }
+
+    .panel, .card {
+      border-color: #dce5de;
+      border-radius: 10px;
+      box-shadow: 0 4px 14px rgba(29, 53, 39, .035);
+    }
+    .panel { padding: 20px; }
+    .panel h3 { color: #2b4435; }
+    .panel p { color: #5f6d63; }
+    .about-grid .panel { background: #fff; }
+    .about-grid .panel:first-child { border-top: 2px solid #91b19b; }
+    .about-grid .panel:nth-child(2) { border-top: 2px solid #c3d4c7; }
+
+    .skill-groups { gap: 12px; }
+    .skill-group { transition: transform .18s ease, border-color .18s ease; }
+    .skill-group:hover { transform: translateY(-2px); border-color: #b7cdbb; }
+    .skill-group h3 { color: #2b4335; }
+    .chip { color: #355747; background: #edf4ee; border-color: #d8e5da; }
+
+    .projects { gap: 16px; }
+    .project-card {
+      border: 1px solid #d7e3d9;
+      border-left: 4px solid #7ea48a;
+      border-radius: 11px;
+      background: #fff;
+      box-shadow: 0 5px 18px rgba(27, 58, 39, .045);
+      transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+    }
+    .project-card:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(27,58,39,.08); border-color: #b9d0bf; }
+    .project-card:first-child {
+      border-left-color: #286c50;
+      background: linear-gradient(115deg, #f0f7f1 0%, #ffffff 58%);
+      box-shadow: 0 7px 22px rgba(35, 78, 51, .07);
+    }
+    .project-content { padding: 24px 25px 15px; }
+    .project-meta { color: #39785d; font-size: .68rem; letter-spacing: .12em; }
+    .project-content h3 { color: #1f3528; font-size: 1.32rem; }
+    .project-content p { color: #58685e; line-height: 1.7; }
+    .project-card:first-child .project-content h3 { font-size: 1.5rem; }
+    .project-details { border-top-color: #e1e9e2; }
+    .project-details summary { color: #2d7556; padding-block: 14px; }
+    .project-details .detail-body { color: #58685e; line-height: 1.75; }
+    .btn.primary { background: #286c50; box-shadow: 0 2px 5px rgba(36,104,79,.12); }
+    .btn.primary:hover { background: #1f593f; }
+    .text-link { color: #2c7555; }
+
+    #experience .timeline { gap: 14px; }
+    #experience .timeline-item {
+      padding: 21px 24px;
+      border: 1px solid #dce5de;
+      border-left: 3px solid #6f9b7d;
+      border-radius: 9px;
+      background: #fff;
+      box-shadow: 0 4px 14px rgba(29,53,39,.035);
+    }
+    .timeline-date { color: #39775d; font-weight: 700; }
+    .timeline-item h3 { color: #263d2f; font-size: .95rem; }
+    .timeline-item p, .timeline-item ul { color: #5d6b62; }
+
+    .certificate { background: #fff; border-radius: 9px; }
+    .cert-placeholder { background: #f3f6f2; border-color: #c7d8ca; color: #69786d; }
+    .education h3 { color: #2b4032; }
+    .education p { color: #657268; }
+
+    .contact-box {
+      padding: 30px 32px;
+      border: 1px solid #d8e5dc;
+      border-radius: 11px;
+      background: linear-gradient(110deg, #edf5ef, #fff 78%);
+    }
+    .contact-box h2 { color: #1e3528; }
+    footer { border-top-color: #dce5dd; color: #68756c; }
+
+    @media (max-width: 600px) {
+      .container { width: calc(100% - 30px); }
+      .hero { padding: 43px 20px 38px; margin-top: 10px; }
+      section { padding-block: 43px; }
+      .project-content { padding: 19px 18px 13px; }
+      .project-details { margin-inline: 18px; }
+      #experience .timeline-item { padding: 17px 18px; }
+      .contact-box { padding: 22px 20px; }
+    }
+
+  
+    .profile-photo { display: block; width: 100%; height: auto; max-height: 390px; object-fit: contain; object-position: center; border-radius: 7px; }
+    .certificate-image-link { display: block; width: 100%; overflow: hidden; border-radius: 5px; background: #f7f7f4; }
+    .certificate-image { display: block; width: 100%; height: auto; aspect-ratio: 1.35 / 1; object-fit: contain; }
+    .certificate-image-link:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+
+    /* Visual refresh: midnight slate with vivid mint accents */
+    :root {
+      --bg: #0b1020;
+      --surface: #141b2d;
+      --surface-2: #1b263a;
+      --text: #edf2f8;
+      --muted: #a5b2c5;
+      --accent: #61e6c1;
+      --accent-2: #8ca7ff;
+      --line: #29364d;
+      --radius: 16px;
+      --max: 1000px;
+    }
+    body { background: var(--bg); color: var(--text); }
+    .container { width: min(var(--max), calc(100% - 48px)); }
+    .nav-wrap { background: rgba(11,16,32,.88); border-bottom: 1px solid rgba(110,137,175,.2); }
+    nav { min-height: 70px; }
+    .brand { color: #f4f7ff; font-size: 1.12rem; letter-spacing: -.055em; }
+    .brand span { color: var(--accent); }
+    .nav-links { color: #b7c3d6; gap: 20px; font-size: .8rem; }
+    .nav-links a { transition: color .2s ease; }
+    .nav-links a:hover { color: var(--accent); }
+    .menu-btn { color: var(--text); background: var(--surface); border-color: var(--line); border-radius: 10px; }
+    .hero {
+      margin-top: 22px; padding: clamp(36px, 6vw, 68px);
+      border: 1px solid #2a3b53; border-radius: 24px;
+      background: radial-gradient(ellipse at 82% 20%, rgba(97,230,193,.12), transparent 42%),
+                  linear-gradient(130deg, #17243a 0%, #111a2c 65%, #131e32 100%);
+      box-shadow: 0 24px 70px rgba(0,0,0,.22);
+    }
+    .hero .eyebrow, .eyebrow { color: #75edcc; }
+    h1 { color: #f2f6ff; font-size: clamp(2.45rem, 5vw, 3.8rem); line-height: 1.08; }
+    h1 .gradient { color: #61e6c1; }
+    .lead { color: #b4c1d4; font-size: .98rem; }
+    .portrait-frame { background: #202d43; border: 1px solid #3a506b; border-radius: 18px; padding: 14px; }
+    .profile-photo { max-height: 410px; border-radius: 12px; }
+    section { padding-block: 66px; border-bottom: 1px solid rgba(112,137,174,.16); }
+    section:nth-of-type(even) { background: rgba(22,31,49,.45); }
+    .section-head { margin-bottom: 30px; }
+    .section-head .eyebrow { color: #75edcc; }
+    .section-head h2 { color: #f0f4fb; font-size: clamp(1.7rem, 3vw, 2.05rem); }
+    .section-head p { color: #a6b4c8; }
+    .panel, .card { background: var(--surface); border-color: #2b3951; border-radius: 16px; box-shadow: 0 8px 26px rgba(0,0,0,.16); }
+    .panel h3 { color: #e8eff9; }
+    .panel p { color: #aab8cb; }
+    .about-grid .panel { background: linear-gradient(145deg, #172238, #141b2d); }
+    .about-grid .panel:first-child { border-top: 2px solid #61e6c1; }
+    .about-grid .panel:nth-child(2) { border-top: 2px solid #8ca7ff; }
+    .skill-group { background: #141d30; border-color: #2b3a53; border-radius: 14px; }
+    .skill-group h3 { color: #e6edf8; }
+    .chip { color: #9df3dc; background: #1b3440; border-color: #2b4b58; border-radius: 999px; }
+    .project-card {
+      border: 1px solid #2d4058; border-left: 4px solid #61e6c1;
+      border-radius: 18px; background: linear-gradient(145deg, #172238, #131b2d);
+      box-shadow: 0 12px 30px rgba(0,0,0,.2);
+    }
+    .project-card:first-child { border-left-color: #8ca7ff; background: linear-gradient(145deg, #1b2740, #141b2d); }
+    .project-card:hover { transform: translateY(-4px); box-shadow: 0 18px 36px rgba(0,0,0,.3); border-color: #47607d; }
+    .project-visual { background: #0f1728; border-bottom-color: #2b3951; }
+    .project-visual img { object-fit: contain; }
+    .project-content { padding: 25px 28px 16px; }
+    .project-meta { color: #79e8ce; }
+    .project-content h3, .project-card:first-child .project-content h3 { color: #f0f5ff; }
+    .project-content p { color: #aab8cb; }
+    .project-details { border-top-color: #2a3951; }
+    .project-details summary { color: #75edcc; }
+    .project-details .detail-body { color: #aab8cb; }
+    .btn { border-color: #34445e; color: #e8eff9; background: #1a263b; border-radius: 10px; }
+    .btn.primary { color: #081520; background: #61e6c1; box-shadow: 0 5px 18px rgba(97,230,193,.16); }
+    .btn.primary:hover { background: #8af3d7; }
+    .text-link { color: #75edcc; }
+    #experience .timeline-item { background: #141b2d; border-color: #2b3951; border-left-color: #8ca7ff; border-radius: 14px; box-shadow: 0 8px 24px rgba(0,0,0,.15); }
+    .timeline-date { color: #75edcc; }
+    .timeline-item h3 { color: #edf3fc; }
+    .timeline-item p, .timeline-item ul { color: #aab8cb; }
+    .certificate { background: #141b2d; border-color: #2b3951; border-radius: 14px; }
+    .certificate-image-link { background: #101827; }
+    .cert-placeholder { background: #1b263a; border-color: #3a506b; color: #aab8cb; }
+    .education h3 { color: #edf3fc; }
+    .education p { color: #aab8cb; }
+    .contact-box { background: radial-gradient(ellipse at 90% 10%, rgba(97,230,193,.12), transparent 45%), linear-gradient(135deg,#17243a,#141b2d); border-color: #2d4058; border-radius: 20px; }
+    .contact-box h2 { color: #f0f5ff; }
+    footer { border-top-color: #29364d; color: #8999b2; }
+    @media (max-width: 600px) {
+      .container { width: calc(100% - 30px); }
+      .hero { padding: 34px 20px 32px; margin-top: 12px; border-radius: 18px; }
+      section { padding-block: 44px; }
+      .project-content { padding: 19px 18px 14px; }
+      .nav-links { background: #141b2d; border-color: #29364d; }
+      .contact-box { padding: 23px 20px; }
+    }
+
+  </style>
+</head>
+<body>
+  <div class="nav-wrap">
+    <nav class="container" aria-label="Main navigation">
+      <a class="brand" href="#home">JCM<span>.</span></a>
+      <button class="menu-btn" id="menuBtn" aria-label="Toggle navigation" aria-expanded="false">Menu</button>
+      <div class="nav-links" id="navLinks">
+        <a href="#about">About</a><a href="#skills">Skills</a><a href="#projects">Projects</a>
+        <a href="#experience">Experience</a><a href="#education">Education</a><a href="#certificates">Documentation</a><a href="#contact">Contact</a>
+      </div>
+    </nav>
+  </div>
+
+  <main>
+    <header class="container hero" id="home">
+      <div>
+        <div class="eyebrow">IT Student · Project Leader · Developer</div>
+        <h1>Hi, I’m Joshua.<br /><span class="gradient">I build digital solutions.</span></h1>
+        <p class="lead">BS Information Technology student focused on mobile application development, system design, and practical software solutions.</p>
+        <div class="actions">
+          <a class="btn primary" href="#projects">Explore my projects ↗</a>
+          <a class="btn" href="#contact">Get in touch</a>
+        </div>
+      </div>
+      <div class="portrait">
+        <div class="portrait-frame">
+          <img src="assets/profile.png" alt="Portrait of Joshua Clarens C. Monzon" class="profile-photo" />
+        </div>
+      </div>
+    </header>
+
+    <section id="about">
+      <div class="container">
+        <div class="section-head"><div class="eyebrow">01 / Introduction</div><h2>Curious by nature.<br />Builder by practice.</h2></div>
+        <div class="about-grid">
+          <div class="panel">
+            <p>I’m Joshua Clarens C. Monzon, a third-year BS Information Technology student at STI College Rosario and a project leader who enjoys turning ideas into practical, user-focused software. My experience spans Android application development, database integration, UI/UX design, and system planning.</p>
+            <p>Through projects such as VETterment and ISIP, I’ve worked with Kotlin, Jetpack Compose, Supabase, and image-recognition technologies including Google ML Kit and TensorFlow Lite. I’ve also led the development of a Unity-based educational game and gained hands-on IT support experience during my internship at Combase IT Solutions. I’m continually building my technical, problem-solving, and collaboration skills while preparing to contribute in a professional software development environment.</p>
+          </div>
+          <div class="panel quick-facts">
+            <div class="fact"><span>Degree</span><strong>BS Information Technology</strong></div>
+            <div class="fact"><span>School</span><strong>STI College Rosario</strong></div>
+            <div class="fact"><span>Expected graduation</span><strong>2027</strong></div>
+            <div class="fact"><span>Location</span><strong>Cavite City, Cavite</strong></div>
+            <div class="fact"><span>Focus</span><strong>Mobile & Software Development</strong></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills">
+      <div class="container">
+        <div class="section-head"><div class="eyebrow">02 / Toolkit</div><h2>Skills & toolkit</h2><p>Core technologies used across my academic projects and internship.</p></div>
+        <div class="skill-groups">
+          <div class="panel skill-group"><h3>Programming languages</h3><div class="chips"><span class="chip">Java</span><span class="chip">Kotlin</span><span class="chip">Python</span><span class="chip">C#</span><span class="chip">JavaScript</span></div></div>
+          <div class="panel skill-group"><h3>Databases</h3><div class="chips"><span class="chip">MySQL</span><span class="chip">Supabase</span><span class="chip">MongoDB</span><span class="chip">SQLite</span></div></div>
+          <div class="panel skill-group"><h3>Development tools</h3><div class="chips"><span class="chip">Android Studio</span><span class="chip">Jetpack Compose</span><span class="chip">Unity</span><span class="chip">Git</span><span class="chip">GitHub</span></div></div>
+          <div class="panel skill-group"><h3>Machine learning</h3><div class="chips"><span class="chip">Google ML Kit</span><span class="chip">TensorFlow Lite</span><span class="chip">Teachable Machines</span></div></div>
+          <div class="panel skill-group"><h3>Professional skills</h3><div class="chips"><span class="chip">UI/UX Design</span><span class="chip">System Analysis</span><span class="chip">Technical Documentation</span><span class="chip">Project Planning</span><span class="chip">Leadership</span><span class="chip">Teamwork</span><span class="chip">Communication</span><span class="chip">Problem-Solving</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <div class="container">
+        <div class="section-head"><div class="eyebrow">03 / Selected work</div><h2>Projects</h2><p>A selection of academic projects, presented with visual previews.</p></div>
+        <div class="projects">
+          <article class="card project-card">
+            <div class="project-visual vetterment"><img src="assets/project_vetterment.png" alt="VETterment project artwork" loading="lazy"></div>
+            <div class="project-content"><div class="project-meta">ACADEMIC THESIS / CAPSTONE</div><h3>VETterment</h3><p>Mobile-Based Veterinary Case Management System with 3D Patient Visualization</p><p>Project Leader and Lead Developer · Android Mobile Application · PetHub Veterinary Clinic, General Trias</p><p>An Android-based academic thesis project for PetHub Veterinary Clinic. It supports pet profiles, medical records, prescriptions, appointments, and treatment progress, with 3D patient visualization to help communicate medical findings to pet owners.</p><div class="chips"><span class="chip">Kotlin</span><span class="chip">Jetpack Compose</span><span class="chip">Supabase</span><span class="chip">PayPal Sandbox</span></div><p style="margin-top:12px"><a class="btn primary" href="https://github.com/CreamyPurpleYam/Vetterment" target="_blank" rel="noopener">View VETterment repository ↗</a></p></div>
+            <details class="project-details"><summary>Project details <span></span></summary><div class="detail-body"><strong>Key features</strong><ul><li>Account registration, authentication, and role-based access</li><li>Pet profiles, appointments, medical records, and prescriptions</li><li>Treatment progress and pet owner care updates</li><li>3D patient visualization and PayPal Sandbox doctor-fee payment</li></ul><strong>My contributions</strong><ul><li>Led project development and team coordination</li><li>Built the Android UI with Kotlin and Jetpack Compose</li><li>Designed and integrated the Supabase database</li><li>Implemented authentication, access roles, and payment sandbox integration</li><li>Planned the system architecture and workflow</li></ul></div></details>
+          </article>
+          <article class="card project-card">
+            <div class="project-visual isip"><img src="assets/project_isip.png" alt="ISIP mobile application interface screenshot" loading="lazy"></div>
+            <div class="project-content"><div class="project-meta">ACADEMIC PROJECT</div><h3>ISIP</h3><p>Instant Species Identification Portable</p><p>Project Leader · Android Application</p><p>An Android application designed to identify local animal species through image recognition, described as a real-life Pokedex for local animals.</p><div class="chips"><span class="chip">Java</span><span class="chip">SQLite</span><span class="chip">Google ML Kit</span><span class="chip">TensorFlow Lite</span></div></div>
+            <details class="project-details"><summary>Project details <span></span></summary><div class="detail-body"><strong>My contributions</strong><ul><li>Led project development and built the Android application</li><li>Integrated image labeling using Google ML Kit</li><li>Trained the model with Teachable Machines</li><li>Converted and integrated the model using TensorFlow Lite</li></ul><p>App screenshots and repository link to be added.</p></div></details>
+          </article>
+          <article class="card project-card">
+            <div class="project-visual garbage"><img src="assets/project_garbage_game.png" alt="Garbage collection and segregation game character artwork" loading="lazy"></div>
+            <div class="project-content"><div class="project-meta">ACADEMIC PROJECT</div><h3>Garbage Collection and Segregation Game</h3><p>Project Leader / Lead Programmer · Unity 2.5D Game</p><p>An educational 2.5D game focused on garbage collection and waste segregation.</p><div class="chips"><span class="chip">Unity</span><span class="chip">C#</span><span class="chip">2.5D</span></div></div>
+            <details class="project-details"><summary>Project details <span></span></summary><div class="detail-body"><p>Gameplay screenshots, demo video, and repository link to be added if available.</p></div></details>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="experience">
+      <div class="container">
+        <div class="section-head"><div class="eyebrow">04 / Professional experience</div><h2>Experience</h2></div>
+        <div class="timeline">
+          <div class="timeline-item"><div class="timeline-date">2023–Present</div><div><h3>Project Leader & Lead Developer · Academic Projects</h3><p>STI College Rosario</p><ul><li>Coordinated project tasks, development workflows, and team collaboration.</li><li>Contributed to application architecture, implementation, and technical documentation.</li></ul></div></div>
+          <div class="timeline-item"><div class="timeline-date">2022</div><div><h3>IT Intern · Combase IT Solutions</h3><p>Rosario, Cavite</p><ul><li>Provided customer service and technical support.</li><li>Performed computer troubleshooting, software installation, and hardware configuration.</li><li>Assisted with system unit assembly, inventory, and computer maintenance.</li></ul></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="education">
+      <div class="container">
+        <div class="section-head"><div class="eyebrow">05 / Academic background</div><h2>Education</h2></div>
+        <div class="education-list">
+          <div class="card education"><h3>STI College Rosario</h3><p>BS Information Technology · 2023–2027</p></div>
+          <div class="card education"><h3>STI College Rosario</h3><p>Mobile App and Web Development · 2020–2023</p></div>
+          <div class="card education"><h3>Sangley Point National High School</h3><p>Junior High School · 2017–2020</p></div>
+          <div class="card education"><h3>Ladislao Diwa Elementary School</h3><p>Elementary · 2011–2017</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="certificates">
+      <div class="container">
+        <div class="section-head"><div class="eyebrow">06 / Documentation</div><h2>Documentation</h2><p>Certificates and recognition with their matching details.</p></div>
+        <div class="cert-grid">
+          <article class="card certificate"><a class="certificate-image-link" href="assets/codefest_2nd_runner_up_2025_2026.png" target="_blank" rel="noopener"><img class="certificate-image" src="assets/codefest_2nd_runner_up_2025_2026.png" alt="STI Tagisan ng Talino 2025–2026 Codefest 2nd Runner-Up certificate" /></a><div><h3>Certificate of Excellence — Codefest 2nd Runner-Up</h3><p>STI Tagisan ng Talino 2025–2026 · Local Level · March 11, 2026 · Team Leader and Lead Programmer · Recipient: Joshua Clarens C. Monzon</p></div></article>
+          <article class="card certificate"><a class="certificate-image-link" href="assets/oracle_java_fundamentals.png" target="_blank" rel="noopener"><img class="certificate-image" src="assets/oracle_java_fundamentals.png" alt="Oracle Academy Java Fundamentals certificate" /></a><div><h3>Award of Course Completion — Java Fundamentals</h3><p>Oracle Academy · June 19, 2024 · Recipient: Joshua Clarens Monzon</p></div></article>
+          <article class="card certificate"><a class="certificate-image-link" href="assets/codefest_1st_runner_up_2023_2024.png" target="_blank" rel="noopener"><img class="certificate-image" src="assets/codefest_1st_runner_up_2023_2024.png" alt="STI Tagisan ng Talino 2023–2024 Codefest 1st Runner-Up certificate" /></a><div><h3>Certificate of Academic Excellence — Codefest 1st Runner-Up</h3><p>STI Tagisan ng Talino 2023–2024 · Local Level · STI College Rosario · March 19, 2024 · Team Leader and UI/UX Designer · Recipient: Joshua Clarens Concepcion Monzon</p></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container">
+        <div class="contact-box">
+          <div><div class="eyebrow">07 / Get in touch</div><h2>Have an opportunity in mind?</h2><p>Available for OJT and software development opportunities.</p></div>
+          <div class="actions" style="margin-top:0"><a class="btn primary" href="mailto:joshuaclarensmonzon@gmail.com">Email me ↗</a><a class="btn" href="https://github.com/CreamyPurpleYam" target="_blank" rel="noopener">GitHub ↗</a></div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer><div class="container"><span>© <span id="year"></span> Joshua Clarens C. Monzon</span><span>Designed as a portfolio in progress.</span></div></footer>
+  <script>
+    const menuBtn = document.getElementById('menuBtn');
+    const navLinks = document.getElementById('navLinks');
+    menuBtn.addEventListener('click', () => {
+      const open = navLinks.classList.toggle('open');
+      menuBtn.setAttribute('aria-expanded', String(open));
+    });
+    navLinks.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
+      navLinks.classList.remove('open'); menuBtn.setAttribute('aria-expanded', 'false');
+    }));
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
